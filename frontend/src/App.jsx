@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative h-screen">
+    <div>
     <Router>
       <Navbar session={session} />
       <Routes>

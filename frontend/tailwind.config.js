@@ -7,11 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#16a34a',
-        'secondary': '#f97316',
-        'accent': '#3b82f6',
-        'neutral': '#1f2937',
-        'base-100': '#ffffff',
+        'custom-text': '#41484b',
+        'cta-bg': '#42484c',
+        'icon-bg': '#42484C',
+        'header-text': '#ffffff',
       },
     },
   },

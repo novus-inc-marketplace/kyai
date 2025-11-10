@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900,300');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: #41484b;
+}

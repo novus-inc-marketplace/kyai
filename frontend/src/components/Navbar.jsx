@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
 const Navbar = ({ session }) => {
   const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 0 && !scrolled) {
-      setScrolled(true);
-    } else if (latest === 0 && scrolled) {
-      setScrolled(false);
-    }
-  });
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
 
   async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -31,12 +35,15 @@ const Navbar = ({ session }) => {
   }
 
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 w-full z-10 transition-colors duration-300 ${scrolled ? 'bg-base-100 shadow-md' : 'bg-transparent'}`}>
+    <nav
+      className={`fixed top-0 left-0 w-full z-20 transition-colors duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <span className={`text-2xl font-bold ${scrolled ? 'text-neutral' : 'text-white'}`}>KYAI</span>
+            <Link to="/" className={`text-2xl font-bold ${scrolled ? 'text-custom-text' : 'text-white'}`}>
+              KYAI
+            </Link>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
@@ -51,14 +58,14 @@ const Navbar = ({ session }) => {
             {session ? (
               <button
                 onClick={signOut}
-                className="bg-secondary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-80"
+                className="bg-cta-bg text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-80"
               >
                 Logout
               </button>
             ) : (
               <button
                 onClick={signInWithGoogle}
-                className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-80"
+                className="bg-cta-bg text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-opacity-80"
               >
                 Login with Google
               </button>
@@ -66,20 +73,17 @@ const Navbar = ({ session }) => {
           </div>
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 
 const NavLink = ({ to, children, scrolled }) => {
   return (
-    <Link to={to} className={`relative text-sm font-medium transition-colors duration-300 ${scrolled ? 'text-neutral hover:text-primary' : 'text-gray-300 hover:text-white'} px-3 py-2 rounded-md`}>
+    <Link
+      to={to}
+      className={`text-sm font-medium transition-colors duration-300 px-3 py-2 rounded-md ${scrolled ? 'text-custom-text hover:text-gray-700' : 'text-gray-300 hover:text-white'}`}
+    >
       {children}
-      <motion.div
-        className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"
-        initial={{ scaleX: 0 }}
-        whileHover={{ scaleX: 1 }}
-        transition={{ duration: 0.3 }}
-      />
     </Link>
   );
 };
