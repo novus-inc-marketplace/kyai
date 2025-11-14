@@ -1,5 +1,7 @@
 
 import React from 'react';
+import AnimatedSection from './AnimatedSection';
+import AnimatedButton from './AnimatedButton';
 
 const Contact = () => {
   return (
@@ -7,6 +9,7 @@ const Contact = () => {
       <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <AnimatedSection>
         <div>
           <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
           <form className="w-full max-w-lg bg-base-100 rounded-lg shadow-md p-8">
@@ -34,14 +37,16 @@ const Contact = () => {
                 <textarea rows="5" className="appearance-none block w-full bg-gray-200 text-neutral border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-message" placeholder="Your message..."></textarea>
               </div>
               <div className="flex justify-between w-full px-3">
-                <button className="shadow bg-primary hover:bg-opacity-80 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded" type="submit">
+                <AnimatedButton className="shadow" onClick={() => {}}>
                   Send Message
-                </button>
+                </AnimatedButton>
               </div>
             </div>
           </form>
         </div>
+        </AnimatedSection>
 
+        <AnimatedSection>
         <div>
           <h2 className="text-3xl font-bold mb-4">Contact Information</h2>
           <div className="bg-base-100 rounded-lg shadow-md p-8">
@@ -56,6 +61,7 @@ const Contact = () => {
             </p>
           </div>
         </div>
+        </AnimatedSection>
       </div>
     </div>
   );

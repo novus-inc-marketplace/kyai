@@ -1,11 +1,13 @@
 
 import React from 'react';
+import AnimatedSection from './AnimatedSection';
 
 const Tenders = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8 text-center">Tenders</h1>
 
+      <AnimatedSection>
       <div className="mb-12">
         <h2 className="text-3xl font-bold mb-4">Available Tenders</h2>
         <div className="overflow-x-auto">
@@ -43,7 +45,9 @@ const Tenders = () => {
           </table>
         </div>
       </div>
+      </AnimatedSection>
 
+      <AnimatedSection>
       <div>
         <h2 className="text-3xl font-bold mb-4">Submit Your Application</h2>
         <form className="w-full max-w-lg mx-auto bg-base-100 rounded-lg shadow-md p-8">
@@ -94,13 +98,14 @@ const Tenders = () => {
               <textarea rows="5" className="appearance-none block w-full bg-gray-200 text-neutral border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-message" placeholder="Your message..."></textarea>
             </div>
             <div className="flex justify-between w-full px-3">
-              <button className="shadow bg-primary hover:bg-opacity-80 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded" type="submit">
+              <button className="shadow bg-primary hover:bg-opacity-80 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded transition-transform hover:scale-[1.02]" type="submit">
                 Send
               </button>
             </div>
           </div>
         </form>
       </div>
+      </AnimatedSection>
     </div>
   );
 };
