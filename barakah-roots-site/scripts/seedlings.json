@@ -1,0 +1,23 @@
+[
+  {
+    "id":"seed_ava_01",
+    "name":"Hass Avocado Seedling",
+    "price_usd":2,
+    "description":"A high-yield Hass Avocado seedling.",
+    "benefits":["Income generating","High yield"]
+  },
+  {
+    "id":"seed_man_01",
+    "name":"Apple Mango Seedling",
+    "price_usd":1.5,
+    "description":"A fast-growing Apple Mango seedling.",
+    "benefits":["Drought resistant","Sweet fruit"]
+  },
+  {
+    "id":"seed_mac_01",
+    "name":"Macadamia Seedling",
+    "price_usd":3,
+    "description":"A high-value Macadamia seedling.",
+    "benefits":["High market value","Long-term investment"]
+  }
+]

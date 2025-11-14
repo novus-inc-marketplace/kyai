@@ -1,0 +1,259 @@
+You are a full-stack UI/UX + frontend engineer assistant. Build a modern, fast, accessible website for "Barakah Roots — Kenya Youth Agricultural Initiative" (based on the attached Manifesto and Constitution). Use React for the frontend, Tailwind CSS for styling, Framer Motion for animations, and Node.js for a simple backend/API. Produce design, component code structure, Tailwind theme extension, content/data schema, sample content, accessibility and SEO guidance, and deployment instructions. Focus on a clean cream + light-green theme, smooth transitions, micro-interactions, and modern UX patterns.
+
+HIGH-LEVEL BRAND & VOICE
+- Brand name: Barakah Roots — Kenya Youth Agricultural Initiative.
+- Tone: hopeful, youth-empowering, action-oriented, conversational but professional.
+- Use copy inspired by the organization's manifesto and constitution (focus on youth leadership, tree planting, climate impact, income generation). (Referenced docs: Manifesto & Constitution.)
+
+DESIGN & PALETTE
+- Main theme: Cream + Light Green.
+- Provide 5 primary hex colors (primary, accent, neutral, text, subtle background):
+  - Cream (main background): #FFF7EC
+  - Light Green (primary buttons / accents): #9FD6A5
+  - Deep Olive (primary dark / CTAs hover): #3F7D4A
+  - Warm Sand (muted surfaces / cards): #F2E6D6
+  - Text (dark): #203122
+- Suggest 2 heading fonts (Google Fonts) and 1 UI font:
+  - Headings: "Inter" (or "Poppins" — choose one)
+  - Accent / Display: "Merriweather" for hero headings (optional)
+  - Body/UI: "Inter"
+- Provide Tailwind theme extension snippet for colors and fonts.
+
+LAYOUT & PAGES (priority order)
+1. Home / Hero
+   - Full-bleed hero with large headline, short mission sentence, CTA buttons: "Adopt a Seedling" and "Join a Planting Drive".
+   - Animated hero background: subtle parallax of tree silhouettes and floating leaves (Framer Motion).
+   - Section: Impact counters (trees planted, youth trained, CO₂ sequestered) with count-up animations.
+   - Quick links to "Adopt", "Volunteer", "Workshops", "Projects".
+
+2. About (Mission & Vision)
+   - Pull short mission text from manifesto + link to full Constitution/Manifesto downloads.
+   - Timeline / Milestones component.
+
+3. Projects / Planting Drives
+   - Map or grid listing current projects, each card shows location, tree type, status, way to sponsor.
+   - Filters: region, tree type, status.
+
+4. Adopt a Seedling (E-commerce-ish)
+   - Product list of seedlings (Avocado, Mango, Macadamia).
+   - Simple checkout flow: sponsor, provide contact, select planting location (or remote donation).
+   - Payment placeholder endpoints (Node backend stub—Stripe-ready notes).
+
+5. Volunteer & Events
+   - Calendar or upcoming drives with RSVP.
+
+6. Training & Workshops
+   - Course list, sign-up forms, downloadable materials, video embeds.
+
+7. Stories / Impact (Blog)
+   - Posts, testimonials, photo gallery with lightbox and lazy loading.
+
+8. Members / Sponsors
+   - Honor roll, sponsorship tiers, lifetime members.
+
+9. Contact / Donate / Legal
+   - Contact form, donation button, links to constitution & manifesto PDFs for transparency.
+
+COMPONENTS & INTERACTIONS
+- Global header: logo left, nav center/right, sticky with subtle backdrop blur after scroll; mobile hamburger transforms to sheet.
+- Footer: quick links, social, newsletter signup.
+- Hero: animated headline entrance (stagger, scale from 0.96 → 1), subtext fade-in, CTAs with micro hover scale & shadow.
+- Card component: subtle lift on hover (translateY -6px, shadow), image top, content, tags.
+- Modal / Lightbox: accessible, trap focus, ESC to close.
+- CountUp component: animate numbers from 0 to target with easing.
+- Map component: interactive markers with micro-interactions; fallback to list for low bandwidth.
+- Image gallery: progressive loading + blurred placeholder.
+- Forms: inline validation, success toasts, accessible labels, keyboard-first.
+
+ANIMATIONS & MOTION GUIDELINES
+- Use Framer Motion for layout / presence / list animations.
+- Keep motion subtle and purposeful:
+  - Durations: 300–500ms for entry/exit, 180–250ms for hovers.
+  - Easing: cubic-bezier(.22,.9,.33,1) or use "easeOut".
+- Use reduced-motion preference: respect `prefers-reduced-motion`.
+- Micro-interactions: button hover scale 1.03, focus ring with green 2px outline, link underline slide.
+
+ACCESSIBILITY & PERFORMANCE
+- All images: `alt` text, descriptive captions where relevant.
+- Contrast: ensure text on cream backgrounds meets AA (dark text #203122).
+- Keyboard navigation testable on all interactive components.
+- Lighthouse target: >90 performance, >90 accessibility.
+- Lazy load offscreen images, compress images, use modern formats (AVIF/WebP).
+- Use semantic HTML and proper ARIA roles only where necessary.
+
+SEO & METADATA
+- Per-page meta: title, description, OG tags, Twitter cards.
+- Structured data: JSON-LD for Organization, Event, and BlogPosting.
+- Sitemap.xml and robots.txt generation in Node backend script.
+- Canonical URLs and accessible breadcrumbs.
+
+DATA MODEL (example JSON schemas)
+- Project
+
+{
+"id": "proj_001",
+"title": "Nkubu Avocado Drive",
+"location": { "name":"Nkubu, Meru", "lat": -0.201, "lng": 37.6 },
+"tree_type": "Hass Avocado",
+"status": "ongoing",
+"planted": 500,
+"goal": 2000,
+"start_date": "2025-03-01",
+"end_date": "2026-03-01",
+"description": "...",
+"photos": ["..."],
+"contact": { "name":"Denis Mutugi", "phone":"+254790147944" }
+}
+
+- Seedling / Product
+
+{
+"id":"seed_ava_01",
+"name":"Hass Avocado Seedling",
+"price_usd":2,
+"description":"... ",
+"benefits":["Income generating","High yield"]
+}
+
+
+BACKEND (Node.js) SUGGESTIONS
+- Simple Express/Koa API with routes:
+- `GET /api/projects`
+- `GET /api/projects/:id`
+- `POST /api/adoptions` (create sponsorship)
+- `POST /api/volunteer`
+- `POST /api/contact`
+- Stripe integration notes: create server endpoint to create PaymentIntent; return client secret to frontend.
+- Admin panel: simple authenticated pages to add projects, update counts, upload photos (can be a basic React admin behind password + JWT).
+
+TAILWIND THEME SNIPPET (example)
+```js
+// tailwind.config.js (extract)
+module.exports = {
+theme: {
+  extend: {
+    colors: {
+      cream: '#FFF7EC',
+      'light-green': '#9FD6A5',
+      'deep-olive': '#3F7D4A',
+      'warm-sand': '#F2E6D6',
+      'barakah-text': '#203122'
+    },
+    fontFamily: {
+      sans: ['Inter', 'system-ui', 'sans-serif'],
+      display: ['Merriweather', 'serif']
+    }
+  }
+}
+}
+
+CODE STRUCTURE (suggested)
+
+    /src
+
+        /components (Header, Footer, Hero, Card, Modal, Form, Map, Gallery)
+
+        /layouts (MainLayout, AdminLayout)
+
+        /pages (Home, About, Projects, Adopt, Volunteer, Workshops, Stories, Contact)
+
+        /lib (api client, utils, hooks)
+
+        /styles (global tailwind + custom utilities)
+
+    /server (Node API)
+
+    /scripts (seed-data, sitemap-generator)
+
+SAMPLE HERO COPY
+
+    Headline: "Plant a Tree. Grow a Future."
+
+    Subtext: "Barakah Roots empowers Kenyan youth to plant income-generating fruit trees — building jobs, cooling cities and feeding families."
+
+    Primary CTA: "Adopt a Seedling"
+
+    Secondary CTA: "Join a Planting Drive"
+
+CONTENT SOURCING & CMS
+
+    Recommend a lightweight CMS: Netlify CMS, Strapi, or markdown + Git for content. Provide a content schema for projects, blog posts, and events.
+
+    Store uploaded images in S3 or a CDN.
+
+TESTING, LINTING & CI
+
+    Frontend: React Testing Library + Jest for unit tests.
+
+    E2E: Playwright for flows (Adopt checkout, volunteer sign-up).
+
+    Lint: ESLint + Prettier; Tailwind CSS linting; Husky pre-commit hooks.
+
+    CI: GitHub Actions to run tests and deploy to Vercel/Netlify.
+
+DEPLOYMENT
+
+    Frontend: Vercel (optimal for React/Next if chosen) or Netlify.
+
+    Backend: Vercel Serverless Functions or a small Heroku/Render instance.
+
+    Environment variables: STRIPE_KEY, CMS creds, DATABASE_URL.
+
+    Use Cloudflare or Vercel CDN and enable caching headers.
+
+DELIVERABLES (ask agent to produce these files)
+
+    React component scaffolding for all pages and core components (with sample JSX + Tailwind classes + Framer Motion usage).
+
+    tailwind.config.js extension and global CSS setup.
+
+    Node.js Express server with example endpoints and Stripe stub.
+
+    Sample seed JSON for projects, seedlings, and posts (10 sample records).
+
+    SEO snippets: example meta tags, JSON-LD for Organization.
+
+    Deployment guide (Vercel) and README.
+
+    Accessibility checklist and Lighthouse baseline report script.
+
+PRIORITY UX / SMALL DETAILS
+
+    Respect reduced motion.
+
+    Provide offline fallback for content that can be static (SWR or React Query caching).
+
+    Make donation/adoption flow 2 steps max.
+
+    Provide a small "impact dashboard" for admins to update counts quickly.
+
+    Add shareable certificates (PDF generation endpoint) for sponsors with GPS coordinates when available.
+
+EXTRA: SMALL UI KIT (button, input, card examples)
+
+    Provide exact Tailwind classes for primary button:
+    class="inline-flex items-center px-5 py-3 rounded-2xl bg-light-green text-white font-semibold shadow-md transform transition-transform hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-4 focus:ring-light-green/40"
+
+    Provide card example:
+    class="bg-white/60 backdrop-blur-sm rounded-xl p-4 shadow-sm hover:shadow-lg transition-shadow transform hover:-translate-y-1"
+
+DELIVER EVERYTHING IN A FOLDER STRUCTURE: /barakah-roots-site/ with code, JSON, README, and a dev:run script to start both frontend and server.
+
+FINAL NOTE FOR THE AGENT
+
+    Use content & quotes from the attached Manifesto & Constitution to populate About/Values/Impact sections.
+
+    Keep the site modern, minimal, and trust-building: emphasize transparency (link to constitution & annual reports) and easy calls-to-action for adoption and volunteering.
+
+    Include a small admin endpoint to upload the annual report PDFs and display them on a transparency page.
+
+Now generate:
+
+    A zip-ready project scaffold (file tree + key files) with sample code for the Home page, Header, Footer, Hero, Project card, and API stubs.
+
+    A README with install, dev, build, and deployment instructions.
+
+    A short style guide (colors, fonts, spacing, motion timings).
+
+Do not ask clarifying questions — assume the manifesto and constitution are the source of truth for content and values. Use the cream + light green palette provided unless adjustments are needed for accessibility.
+

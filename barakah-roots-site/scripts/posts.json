@@ -1,0 +1,26 @@
+[
+  {
+    "id": "post_001",
+    "title": "Our First Planting Drive in Nkubu",
+    "author": "Jane Doe",
+    "date": "2025-03-15",
+    "content": "We are excited to announce our first planting drive in Nkubu, Meru. We planted over 500 Hass Avocado seedlings with the help of local youth.",
+    "tags": ["planting-drive", "avocado", "nkubu"]
+  },
+  {
+    "id": "post_002",
+    "title": "The Impact of a Single Tree",
+    "author": "John Smith",
+    "date": "2025-04-01",
+    "content": "A single tree can make a huge difference. It can provide food, income, and a better environment for future generations.",
+    "tags": ["impact", "environment", "sustainability"]
+  },
+  {
+    "id": "post_003",
+    "title": "Youth Empowerment through Agriculture",
+    "author": "Peter Jones",
+    "date": "2025-04-20",
+    "content": "Our mission is to empower Kenyan youth through agriculture. We provide training and resources to help them start their own tree-planting businesses.",
+    "tags": ["youth-empowerment", "agriculture", "training"]
+  }
+]
