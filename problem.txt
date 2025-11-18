@@ -1,0 +1,19 @@
+Problem Description:
+
+During the execution of `npm ci` in the `barakah-roots-site` directory, an `EPERM: operation not permitted, unlink` error is encountered.
+
+Error details:
+```
+npm error code EPERM
+npm error syscall unlink
+npm error path C:\Users\anson\Desktop\git\tender_project\barakah-roots-site\node_modules\lightningcss-win32-x64-msvc\lightningcss.win32-x64-msvc.node
+npm error errno -4048
+```
+
+This error indicates that `npm` is unable to delete or modify a specific file (`lightningcss.win32-x64-msvc.node`) within the `node_modules` directory.
+
+Common causes for this error include:
+1.  **File in Use:** Another program (e.g., IDE, terminal, antivirus software) is currently holding a lock on the file, preventing `npm` from accessing it.
+2.  **Permissions Issue:** The current user lacks the necessary permissions to modify or delete files in that directory.
+
+Resolution requires manual intervention to ensure the file is not in use and/or permissions are correct before retrying `npm ci`.

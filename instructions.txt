@@ -1,156 +1,74 @@
-You are a senior full-stack engineer.  
-My deployed site is rendering with DEFAULT BROWSER STYLES (Times New Roman, no layout, no colors, no spacing).  
-THIS MEANS: Tailwind CSS is NOT being applied in production.
+You are a senior full-stack engineer with full Windows system access.  
+Your task is to FIX the npm install failure caused by this error:
 
-You must diagnose and FIX the issue completely.
+EPERM: operation not permitted, unlink  
+C:\Users\anson\Desktop\git\tender_project\barakah-roots-site\node_modules\lightningcss-win32-x64-msvc\lightningcss.win32-x64-msvc.node
 
-Here is what you MUST do:
+This means the OS is blocking deletion of a native binary inside node_modules.
 
-====================================================
-🔥 1. IDENTIFY ROOT CAUSE — run these checks
-====================================================
+You MUST perform the following steps in order:
 
-Check in DevTools (Network tab):
-- Is ANY CSS file being loaded?  
-- What is the file name, path, and HTTP status code?  
-- Does the response contain actual Tailwind utilities?
+==================================================
+1. REGAIN OWNERSHIP AND PERMISSIONS
+==================================================
+Run these commands in an elevated Administrator shell:
 
-Check my build output:
-- Run `npm ci` then `npm run build`
-- Then show me:
-  - `ls -la dist/assets` (or `build/static/css`)
-  - `head -n 40 dist/assets/*.css`
+takeown /f "C:\Users\anson\Desktop\git\tender_project\barakah-roots-site\node_modules\lightningcss-win32-x64-msvc\lightningcss.win32-x64-msvc.node"
 
-IF the CSS file is missing → build didn’t emit CSS.  
-IF the CSS file exists but is tiny → Tailwind purged EVERYTHING.  
-IF CSS file exists but is NOT requested → import is missing or wrong output directory.
+icacls "C:\Users\anson\Desktop\git\tender_project\barakah-roots-site\node_modules\lightningcss-win32-x64-msvc\lightningcss.win32-x64-msvc.node" /grant %USERNAME%:F
 
-====================================================
-🔥 2. VALIDATE CONFIG FILES — FIX ANYTHING WRONG
-====================================================
+==================================================
+2. DELETE THE LOCKED FILE AND NODE_MODULES
+==================================================
+Delete the problematic file first:
 
-Check and correct these:
+del /F /Q "C:\Users\anson\Desktop\git\tender_project\barakah-roots-site\node_modules\lightningcss-win32-x64-msvc\lightningcss.win32-x64-msvc.node"
 
-**A. src/main.jsx (or src/index.jsx)**
-- MUST contain:  
-  `import './index.css'`
+Then delete ALL of node_modules:
 
-**B. src/index.css**
-- MUST contain:
+rd /s /q "C:\Users\anson\Desktop\git\tender_project\barakah-roots-site\node_modules"
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+If deletion still fails:
+- Re-identify the locking process and kill it.
+- Retry the deletion until successful.
 
+==================================================
+3. CLEAN NPM CACHE
+==================================================
+npm cache clean --force
 
-**C. postcss.config.js**
-- MUST contain:
+==================================================
+4. REINSTALL DEPENDENCIES CLEANLY
+==================================================
+cd C:\Users\anson\Desktop\git\tender_project\barakah-roots-site
+npm ci
 
-module.exports = {
-plugins: {
-tailwindcss: {},
-autoprefixer: {},
-},
-}
+If npm ci STILL fails:
+- Repeat lock detection → kill process → retry.
 
+==================================================
+5. VERIFY FIX
+==================================================
+After successful install, run:
 
-**D. tailwind.config.js**
-- MUST contain correct globs:
+npm run build
 
-content: [
-'./index.html',
-'./src/**/*.{js,jsx,ts,tsx,html}'
-]
+Confirm:
+- No EPERM or unlink errors
+- lightningcss module is rebuilt properly
+- build completes without warnings or failures
 
+Then show:
+- directory listing of: node_modules\lightningcss-win32-x64-msvc
+- confirmation logs of successful npm ci + build
 
-If globs are wrong → Tailwind STRIPS ALL STYLES in production.
-
-**E. vite.config.js / build config**
-- Ensure output folder is `dist/`
-- Ensure CSS is not excluded from bundling
-
-====================================================
-🔥 3. FIX DEPLOYMENT MISCONFIGURATIONS
-====================================================
-
-Depending on host (Vercel/Netlify/etc):
-
-- Publish directory must be **dist/**
-- Build command must be:  
-`npm run build`
-- No extra rewrites removing assets  
-- Ensure CSS file is served with `Content-Type: text/css`
-
-====================================================
-🔥 4. APPLY THESE CRITICAL FILE PATCHES IF THEY’RE MISSING
-====================================================
-
-**PATCH #1 — src/main.jsx**
-
-import './index.css'
-
-
-**PATCH #2 — src/index.css**
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-**PATCH #3 — postcss.config.js**
-
-module.exports = {
-plugins: {
-tailwindcss: {},
-autoprefixer: {},
-}
-}
-
-
-**PATCH #4 — tailwind.config.js**
-
-content: [
-'./index.html',
-'./src/**/*.{js,jsx,ts,tsx,html}'
-],
-theme: {
-extend: {
-colors: {
-cream: '#FFF7EC',
-'light-green': '#9FD6A5',
-'deep-olive': '#3F7D4A',
-'warm-sand': '#F2E6D6',
-'barakah-text': '#203122'
-},
-fontFamily: {
-sans: ['Inter', 'system-ui', 'sans-serif'],
-display: ['Merriweather', 'serif']
-}
-}
-}
-
-
-====================================================
-🔥 5. AFTER FIXING — VERIFY
-====================================================
-
-You must verify:
-
-- CSS loads with HTTP 200  
-- `curl <cssfile> | head` contains Tailwind utilities (e.g., `.flex`, `.p-4`, `.bg-light-green`)  
-- No default browser serif fonts  
-- Page background is cream (#FFF7EC)  
-- Buttons and accents use light-green (#9FD6A5)
-
-====================================================
-🎯 OBJECTIVE
-====================================================
-
-**Fix the Tailwind CSS loading failure so the production website is styled exactly as required by the design palette & structure found in prompt.txt.  
-Ensure the final deployment matches a modern Tailwind website with transitions, color palette, and proper layout.**
-
+==================================================
+6. FINALLY
+==================================================
 Return:
-1. Root-cause explanation  
-2. Full patches (diffs)  
-3. Updated configs  
-4. Confirmation of working CSS in production  
+1. The exact root cause (file lock, antivirus, ownership issue).
+2. Every command executed with their outputs.
+3. Confirmation that dependencies installed successfully.
+4. Confirmation that the project builds normally.
+
+Perform all of these steps NOW.
