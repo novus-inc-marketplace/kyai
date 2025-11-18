@@ -40,6 +40,10 @@ app.get('/api/projects', (req, res) => {
   res.json(projects);
 });
 
+app.get('/api/seedlings', (req, res) => {
+  res.json(seedlings);
+});
+
 app.get('/api/projects/:id', (req, res) => {
   const project = projects.find((p) => p.id === req.params.id);
   if (project) {

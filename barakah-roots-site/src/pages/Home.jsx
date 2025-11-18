@@ -42,8 +42,24 @@ const ImpactStat = ({ value, suffix, text }) => {
 
 
 const Home = () => {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Barakah Roots — Kenya Youth Agricultural Initiative",
+    "url": "https://barakahroots.org",
+    "logo": "https://barakahroots.org/logo.png",
+    "sameAs": [
+      // Add social media links here
+    ]
+  };
+
   return (
     <div>
+      <title>Barakah Roots - Plant a Tree, Grow a Future</title>
+      <meta name="description" content="Barakah Roots empowers Kenyan youth to plant income-generating fruit trees — building jobs, cooling cities and feeding families." />
+      <script type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </script>
       <Hero />
       <section className="py-20 bg-warm-sand">
         <div className="container mx-auto text-center">
