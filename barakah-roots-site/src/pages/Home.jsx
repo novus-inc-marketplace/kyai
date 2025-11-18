@@ -2,6 +2,8 @@ import React from 'react';
 import Hero from '../components/Hero';
 import ProjectCard from '../components/ProjectCard';
 import { motion } from 'framer-motion';
+import CountUp from 'react-countup';
+import { useInView } from 'react-intersection-observer';
 
 const projects = [
   {
@@ -21,6 +23,24 @@ const projects = [
   // Add more sample projects here
 ];
 
+const ImpactStat = ({ value, suffix, text }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  return (
+    <div ref={ref} className="text-center">
+      <p className="text-5xl font-bold text-light-green">
+        {inView ? <CountUp end={value} duration={2.5} /> : '0'}
+        {suffix}
+      </p>
+      <p className="text-barakah-text">{text}</p>
+    </div>
+  );
+};
+
+
 const Home = () => {
   return (
     <div>
@@ -29,18 +49,9 @@ const Home = () => {
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-deep-olive mb-8">Our Impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <p className="text-5xl font-bold text-light-green">10,000+</p>
-              <p className="text-barakah-text">Trees Planted</p>
-            </div>
-            <div className="text-center">
-              <p className="text-5xl font-bold text-light-green">500+</p>
-              <p className="text-barakah-text">Youth Trained</p>
-            </div>
-            <div className="text-center">
-              <p className="text-5xl font-bold text-light-green">1,000+</p>
-              <p className="text-barakah-text">Tonnes of CO₂ Sequestered</p>
-            </div>
+            <ImpactStat value={10000} suffix="+" text="Trees Planted" />
+            <ImpactStat value={500} suffix="+" text="Youth Trained" />
+            <ImpactStat value={1000} suffix="+" text="Tonnes of CO₂ Sequestered" />
           </div>
         </div>
       </section>
