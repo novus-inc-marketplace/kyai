@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!--Page Title-->
+    <title>Style Guide - Barakah Roots</title>
+
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="Barakah Roots, Style Guide, Design System, UI Components, CSS, HTML, Frontend">
+    <meta name="description" content="A comprehensive style guide for Barakah Roots, showcasing all UI components, typography, colors, and utility classes for consistent design and development.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
+
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--Icon Fonts - Font Awesome Icons-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Animate CSS-->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+
+    <!--Google Webfonts-->
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Merriweather:wght@700;900&display=swap' rel='stylesheet'>
+
+    <style>
+        /* Additional styles for the style guide itself */
+        body {
+            padding: 20px;
+        }
+        .section-divider {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            margin: 10px;
+            vertical-align: top;
+            text-align: center;
+            line-height: 100px;
+            font-size: 0.8em;
+        }
+        .button-example .button {
+            margin-right: 10px;
+        }
+        .form-example form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        .form-example input, .form-example textarea, .form-example button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .card-example {
+            margin-bottom: 20px;
+        }
+        .card-example .product-card, .card-example .project-card, .card-example .blog-post, .card-example .event-card {
+            width: 30%; /* Adjust for display in style guide */
+            margin-right: 2%;
+            float: left;
+        }
+        .card-example img {
+            max-width: 100%;
+            height: auto;
+        }
+        .sr-only-example {
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .focus-ring-example a:focus {
+            outline: 2px solid var(--color-deep-olive);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="wrapper">
+        <header class="row clearfix">
+            <div class="col-1">
+                <h1>Barakah Roots Style Guide</h1>
+                <p>This document showcases the design system elements for the Barakah Roots website.</p>
+            </div>
+        </header>
+
+        <main id="content">
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Typography</h2>
+                    <h1>Heading 1 - Plant a Tree. Grow a Future.</h1>
+                    <h2>Heading 2 - Empowering Kenyan Youth Through Sustainable Agriculture</h2>
+                    <h3>Heading 3 - Our Mission, Vision, and Values</h3>
+                    <h4>Heading 4 - Mango Seedling</h4>
+                    <h5>Heading 5 - Smaller Heading</h5>
+                    <h6>Heading 6 - Smallest Heading</h6>
+                    <p>This is a standard paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p><a href="#">This is a standard link.</a></p>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Colors</h2>
+                    <div class="color-box" style="background-color: var(--color-cream);">--color-cream</div>
+                    <div class="color-box" style="background-color: var(--color-light-green);">--color-light-green</div>
+                    <div class="color-box" style="background-color: var(--color-deep-olive); color: white;">--color-deep-olive</div>
+                    <div class="color-box" style="background-color: var(--color-text); color: white;">--color-text</div>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Buttons</h2>
+                    <div class="button-example">
+                        <a href="#" class="button">Primary Button</a>
+                        <a href="#" class="button button-secondary">Secondary Button</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Form Elements</h2>
+                    <div class="form-example">
+                        <form>
+                            <label for="sgName" class="sr-only">Your Name</label>
+                            <input type="text" id="sgName" placeholder="Your Name" required>
+
+                            <label for="sgEmail" class="sr-only">Your Email</label>
+                            <input type="email" id="sgEmail" placeholder="Your Email" required>
+
+                            <label for="sgMessage" class="sr-only">Your Message</label>
+                            <textarea id="sgMessage" placeholder="Your Message"></textarea>
+
+                            <button type="submit" class="button">Submit Form</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Cards</h2>
+                    <div class="card-example clearfix">
+                        <!-- Product Card Example -->
+                        <div class="col-3 product-card card-utility">
+                            <img src="images/gallery-images/gallery-image-1.jpg" alt="Mango Seedling" class="product-image"/>
+                            <div class="product-info">
+                                <h4>Mango Seedling</h4>
+                                <p>A resilient mango tree.</p>
+                                <span class="price">$25</span>
+                                <button class="button add-to-cart">Adopt Now</button>
+                            </div>
+                        </div>
+
+                        <!-- Project Card Example -->
+                        <div class="col-3 project-card card-utility">
+                            <img src="images/gallery-images/gallery-image-2.jpg" alt="Kisumu Youth Agri-Entrepreneurship" class="project-image"/>
+                            <div class="project-info">
+                                <h4>Kisumu Youth Agri-Entrepreneurship</h4>
+                                <p>Training young farmers.</p>
+                                <a href="#" class="button button-secondary">Learn More</a>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post Example -->
+                        <div class="col-3 blog-post card-utility">
+                            <img src="images/gallery-images/gallery-image-3.jpg" alt="Jane's thriving fruit farm" class="post-image"/>
+                            <div class="post-info">
+                                <h4>From Barren Land to Bountiful Harvest</h4>
+                                <p class="post-meta">By John Doe</p>
+                                <p>Jane transformed her family's fortunes.</p>
+                                <a href="#" class="button button-secondary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Utility Classes</h2>
+                    <h3><code>.sr-only</code></h3>
+                    <div class="sr-only-example">
+                        <label for="srOnlyTest">This label is visually hidden but accessible to screen readers.</label>
+                        <input type="text" id="srOnlyTest" placeholder="Type something here">
+                    </div>
+                    <h3><code>.focus-ring</code></h3>
+                    <p>Focus on the button below to see the focus ring:</p>
+                    <a href="#" class="button focus-ring">Focus Me</a>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Social Icons</h2>
+                    <ul class="social-icons">
+                        <li><a href="#" title="Facebook"><i class="fa fa-facebook fa-2x"></i></a></li>
+                        <li><a href="#" title="Twitter"><i class="fa fa-twitter fa-2x"></i></a></li>
+                        <li><a href="#" title="Instagram"><i class="fa fa-instagram fa-2x"></i></a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Navigation Links</h2>
+                    <h3>Desktop Navigation Example</h3>
+                    <nav id="nav-main-sg">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Projects</a></li>
+                        </ul>
+                    </nav>
+                    <h3>Mobile Navigation Example (Conceptual)</h3>
+                    <p>The mobile navigation is dynamically generated and styled. Its appearance would depend on screen size.</p>
+                    <nav id="nav-mobile-sg">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Projects</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="row clearfix section-divider">
+                <div class="col-1">
+                    <h2>Impact Counters</h2>
+                    <div class="row clearfix impact-counters">
+                        <div class="col-3 text-center">
+                            <div class="impact-counter">
+                                <span class="counter" data-target="50000">0</span>
+                                <h4>Trees Planted</h4>
+                            </div>
+                        </div>
+                        <div class="col-3 text-center">
+                            <div class="impact-counter">
+                                <span class="counter" data-target="2500">0</span>
+                                <h4>Youth Trained</h4>
+                            </div>
+                        </div>
+                        <div class="col-3 text-center">
+                            <div class="impact-counter">
+                                <span class="counter" data-target="10000">0</span>
+                                <h4>Tons CO₂ Sequestered</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!--Footer-->
+        <footer id="landing-footer" class="clearfix">
+            <div class="row clearfix">
+                <p id="copyright" class="col-2">Made with love by <a href="https://www.shapingrain.com">ShapingRain</a></p>
+                <ul class="col-2 social-icons">
+                    <li><a target="_blank" title="Facebook" href="https://www.facebook.com/username"><i class="fa fa-facebook fa-1x"></i><span>Facebook</span></a></li>
+                    <li><a target="_blank" title="Google+" href="http://google.com/+username"><i class="fa fa-google-plus fa-1x"></i><span>Google+</span></a></li>
+                    <li><a target="_blank" title="Twitter" href="http://www.twitter.com/username"><i class="fa fa-twitter fa-1x"></i><span>Twitter</span></a></li>
+                </ul>
+            </div>
+        </footer>
+        <!--End of Footer-->
+
+    </div>
+
+    <!-- Include JavaScript resources -->
+    <script src="js/jquery.1.8.3.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/featherlight.min.js"></script>
+    <script src="js/featherlight.gallery.min.js"></script>
+    <script src="js/jquery.enllax.min.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.stickyNavbar.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/images-loaded.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/site.js"></script>
+
+</body>
+</html>
