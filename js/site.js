@@ -94,32 +94,86 @@ $(document).ready(function () {
 		offset: '80%' // Trigger when 80% of the element is visible
 	});
 
-	// Form Submission Stub for Volunteer Form
-	$('.rsvp-form').on('submit', function(e) {
-		e.preventDefault(); // Prevent default form submission
+	// --- Improved Form Handling ---
 
-		const form = $(this);
-		const formData = {
-			name: form.find('#volunteerName').val(),
-			email: form.find('#volunteerEmail').val(),
-			skills: form.find('#volunteerSkills').val()
-		};
-
-		console.log('Volunteer Form Data:', formData);
-
-		// Simulate API call
-		setTimeout(() => {
-			const success = Math.random() > 0.2; // 80% chance of success
-
-			if (success) {
-				console.log('Form submission successful!');
-				alert('Thank you for signing up to volunteer! We will be in touch shortly.');
-				form[0].reset(); // Clear the form
+	// Generic Form Validator
+	function validateForm(form) {
+		let isValid = true;
+		form.find('[required]').each(function() {
+			if ($(this).val() === '') {
+				isValid = false;
+				$(this).addClass('error');
 			} else {
-				console.error('Form submission failed. Please try again.');
-				alert('There was an error submitting your form. Please try again.');
+				$(this).removeClass('error');
 			}
-		}, 1000); // Simulate 1 second network delay
+		});
+		return isValid;
+	}
+
+	// Volunteer Form Submission
+	$('.rsvp-form').on('submit', function(e) {
+		e.preventDefault();
+		const form = $(this);
+
+		if (validateForm(form)) {
+			// Simulate API call
+			setTimeout(() => {
+				alert('Thank you for signing up to volunteer! We will be in touch shortly.');
+				form[0].reset();
+			}, 500);
+		} else {
+			alert('Please fill out all required fields.');
+		}
+	});
+
+	// --- Adoption Flow ---
+	let cart = [];
+
+	// Add to Cart
+	$('.add-to-cart').on('click', function() {
+		const productCard = $(this).closest('.product-card');
+		const itemName = productCard.find('h4').text();
+		const itemPrice = parseFloat(productCard.find('.price').text().replace(', ''));
+
+		cart.push({ name: itemName, price: itemPrice });
+		updateCartDisplay();
+
+		// Scroll to cart summary
+		$('html, body').animate({
+			scrollTop: $(".cart-summary").offset().top - 100 // Adjust offset for header
+		}, 500);
+	});
+
+	// Update Cart Display
+	function updateCartDisplay() {
+		const cartItemsContainer = $('#cart-items');
+		const cartTotalContainer = $('#cart-total');
+		const cartSummary = $('.cart-summary');
+
+		cartItemsContainer.empty();
+		let total = 0;
+
+		if (cart.length > 0) {
+			cart.forEach(item => {
+				cartItemsContainer.append(`<li>${item.name} - ${item.price}</li>`);
+				total += item.price;
+			});
+			cartTotalContainer.text(`${total.toFixed(2)}`);
+			cartSummary.slideDown();
+		} else {
+			cartSummary.slideUp();
+		}
+	}
+
+	// Proceed to Checkout
+	$('.checkout-stub .button').on('click', function() {
+		if (cart.length > 0) {
+			alert('Thank you for your adoption! Your contribution makes a real difference. (This is a demonstration - no payment was processed).');
+			cart = [];
+			updateCartDisplay();
+		} else {
+			alert('Your cart is empty. Please choose a seedling to adopt first.');
+		}
 	});
 
 });
