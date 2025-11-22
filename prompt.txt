@@ -1,57 +1,142 @@
-You are an AI website editor. Edit the provided static HTML/CSS template to create a modern, accessible, and high-performance site for:
+You are an AI tasked with fixing and upgrading a STATIC HTML website for “Barakah Roots — Kenya Youth Agricultural Initiative.” The site is built using HTML + CSS + jQuery plugins, based on a customized Namari template. You must correct all broken functionality, link missing buttons, fix non-working redirect flows, and repair any PDF download buttons.
 
-Brand: Barakah Roots — Kenya Youth Agricultural Initiative
-Theme: Cream background (#FFF7EC) with Light Green accents (#9FD6A5) and Deep Olive accents (#3F7D4A). Use a clean, minimal layout with generous spacing and readable type.
+🔧 1. Fix the Homepage Functional Issues
+A. Fix dead CTAs
 
-Voice & content: Hopeful, youth-empowering, action-oriented, conversational but professional. Use copy inspired by an attached Manifesto & Constitution (focus: youth leadership, tree planting, climate impact, income generation, transparency). Include these short pieces of copy:
-- Headline (hero): "Plant a Tree. Grow a Future."
-- Subtext: "Barakah Roots empowers Kenyan youth to plant income-generating fruit trees — creating jobs, cooling communities, and feeding families."
-- CTAs: "Adopt a Seedling" (primary), "Join a Planting Drive" (secondary).
+On index.html, the following buttons do not redirect anywhere, but they MUST:
 
-Pages and priority:
-1. Home: full-bleed hero with two CTAs; animated but subtle background (floating leaves) using CSS/JS animation; impact counters (trees planted, youth trained, CO₂ sequestered) with count-up animation; quick links to Adopt, Volunteer, Workshops, Projects.
-2. About: short mission and values pulled from Manifesto & Constitution; link to download full Manifesto & Constitution PDFs.
-3. Projects: grid of project cards (image, title, location, tree type, planted/goal, Sponsor button); include a simple filter by region or tree type (JS).
-4. Adopt a Seedling: product list of seedlings (Avocado, Mango, Macadamia) with price, benefits, and a 2-step checkout stub (sponsor info + payment placeholder).
-5. Volunteer & Events: list upcoming events with RSVP form.
-6. Stories/Impact: blog-like posts, testimonials, and photo gallery with lightbox.
+“Adopt a Seedling” (Hero section)
+→ Redirect to: adopt.html
 
-Accessibility & performance:
-- Use semantic HTML (header, nav, main, article, footer).
-- All images must have `alt`. Lazy load non-critical images.
-- Respect `prefers-reduced-motion`.
-- Ensure color contrast for text on cream background meets WCAG AA (use #203122 for text).
-- Make forms keyboard navigable, with clear labels and error states.
+“Join a Planting Drive” (Hero section)
+→ Redirect to: projects.html#drives or volunteer.html
+(Choose whichever is the most logical based on existing structure.)
 
-Design system:
-- Fonts: load Inter (body) and Merriweather (hero headings) from Google Fonts.
-- Provide CSS variables for colors and spacing.
-- Provide exact classes or small utility classes to reproduce primary button, card, focus ring:
-  - Primary button: rounded-2xl, padding, background #9FD6A5, white text, subtle shadow, hover lift.
-  - Card: rounded-xl, light shadow, hover translateY(-6px).
-- Motion timings: hover 180–250ms; entry/exit 300–500ms; easing cubic-bezier(.22,.9,.33,1).
+Get Involved → Buttons
 
-Behavior & micro-interactions:
-- Sticky header with subtle backdrop blur after scroll; mobile hamburger opens a sheet.
-- Lightbox modal trap focus; ESC to close.
-- Count-up animation for impact counters.
-- Provide a downloadable PDF certificate placeholder after adoption (generate link stub).
+“Adopt a Seedling” → adopt.html
 
-Data & content:
-- Populate Projects with the following sample items (title, location, tree_type, planted, goal): Nkubu Avocado Drive (Meru), Mwingi Mango Grove (Kitui), Kilifi Coastal Reforestation (Kilifi), Nakuru Macadamia Pilot (Nakuru), Nairobi Urban Greening (Nairobi).
-- Seedlings: Hass Avocado ($2), Apple Mango ($1.5), Macadamia ($3). Provide short descriptions and benefits.
+“Volunteer With Us” → volunteer.html
 
-Deliverable:
-- Modify the template to include the above pages and components.
-- Produce static HTML/CSS/JS files ready to deploy (no server required). For payment and form submissions, create stubs that POST to `/api/*` endpoints (these can be `fetch()` stubs returning mock success).
-- Ensure all pages include SEO meta (title, description, OG), `robots.txt` and `sitemap.xml` generation script (simple JS that lists pages).
-- Export a small style guide file (style-guide.html) summarizing colors, fonts, buttons, and motion.
+“Support Our Work” → donate.html (or create donate.html if missing)
 
-Constraints:
-- Keep the site static-first (use minimal JS, no heavy frameworks).
-- Keep bundle size small (prefer vanilla JS, small polyfills only if needed).
-- Respect privacy: forms should not auto-submit to 3rd-party analytics; include a placeholder consent banner (no real analytics enabled).
+Ensure all CTA anchor tags receive actual working href links.
 
-Priority: make 'Adopt a Seedling' flow frictionless — a 2-step static flow that collects sponsor info and shows a 'payment' placeholder with instructions to contact the org or pay via mobile money.
+B. Fix unrealistic Impact Figures
 
-Use the cream + light green palette exactly, and use copy inspired by the Manifesto & Constitution when adding mission/values text and headings.
+In the home impact section (“Trees Planted”, “Youth Trained”, “Tons CO₂ Sequestered”), the numbers are placeholders and unrealistic.
+
+Based on the organization being roughly 3 years old, generate realistic startup-friendly impact numbers for a growing youth agricultural initiative in Kenya.
+
+Suggested realistic ranges:
+
+Trees Planted: 3,500 – 6,000
+
+Youth Trained: 150 – 350
+
+Tons of CO₂ Sequestered: 300 – 900
+
+Replace the placeholder values with realistic, credible figures and update the count-up script accordingly.
+
+🔧 2. Fix Broken Functionality Across ALL Pages
+
+Perform the same analysis and fixes across every other HTML page:
+
+A. Fix ALL buttons, CTAs, and internal navigation links
+
+Examples:
+
+Buttons that visually appear clickable but have missing or # href values → assign correct pages.
+
+Navigation inconsistencies on adopt.html (mentioned in GENERALIZED.md) → make nav uniform across all pages.
+
+B. Fix non-functioning PDF buttons
+
+Locate ALL PDF download links across the site (annual reports, constitution, manifesto, transparency documents, forms, etc.) and:
+
+Fix broken links
+
+Ensure they point to real PDF assets inside /pdfs/ or /documents/
+
+If PDFs do not exist, create placeholder filenames such as:
+
+/pdfs/BarakahRoots-Constitution.pdf
+
+/pdfs/BarakahRoots-Manifesto.pdf
+
+/pdfs/BarakahRoots-AnnualReport2024.pdf
+
+Ensure the “Download” buttons actually download.
+
+C. Validate forms (Adopt form, Volunteer form, Contact form)
+
+Currently some forms are placeholders and do not submit anywhere.
+
+Implement consistent behavior:
+
+Add a working action attribute using a stub /api/form endpoint
+OR
+
+Use a static JS handler that shows a success message toast
+
+Make sure:
+
+Fields validate correctly
+
+Errors show properly
+
+Submission does NOT reload the page
+
+Console mock submissions are removed unless kept intentionally
+
+D. Fix lightbox, gallery, and modal issues
+
+Some galleries depend on jQuery plugins. Ensure:
+
+Featherlight / gallery plugins load correctly
+
+Lightbox images open as expected
+
+Broken images or missing gallery items are replaced with working assets
+
+E. Fix navigation structure and breadcrumb issues
+
+Ensure:
+
+Nav is identical across ALL pages
+
+Active page highlight works
+
+Mobile hamburger menu opens/closes correctly
+
+All links navigate to real pages
+
+🔧 3. Update redirects, anchors, and deep-links
+
+Some sections (e.g., timelines, “Get Involved”, “Why Barakah Roots”) contain links pointing to nonexistent anchor IDs.
+
+Fix all:
+
+Internal anchors
+
+Scroll-to-section JS
+
+Missing section IDs
+
+Dead “Learn More” links
+
+🔧 4. Improve Accessibility & SEO While Fixing
+
+While repairing the pages, ensure:
+
+All images have meaningful alt attributes
+
+All buttons are actual <a> links or <button> tags
+
+Color contrast meets AA (use #203122 for text on cream background)
+
+Add missing meta descriptions to any page lacking them
+
+Ensure the sitemap reflects the fixed structure
+
+Refer to GENERALIZED.md for consistency with previous audit. 
