@@ -133,7 +133,7 @@ $(document).ready(function () {
 	$('.add-to-cart').on('click', function() {
 		const productCard = $(this).closest('.product-card');
 		const itemName = productCard.find('h4').text();
-		const itemPrice = parseFloat(productCard.find('.price').text().replace(', ''));
+		const itemPrice = parseFloat(productCard.find('.price').text().replace(/[^0-9.-]+/g,"")); // Robust parsing for price
 
 		cart.push({ name: itemName, price: itemPrice });
 		updateCartDisplay();
@@ -180,9 +180,29 @@ $(document).ready(function () {
 
 
 /* Preloader and animations */
-$(window).load(function () { // makes sure the whole site is loaded
-	$('#preloader').delay(1500).fadeOut('slow'); // will fade out the preloader after 1.5 seconds
-	$('body').delay(1500).css({'overflow-y': 'visible'}); // Delay body overflow change as well
+// Ensure body overflow is hidden immediately to prevent scrolling before content is ready
+$('body').css({'overflow-y': 'hidden'});
+console.log('Preloader: Overflow hidden applied.');
+
+$(window).on('load', function () { // makes sure the whole site is loaded
+    console.log('Preloader: Window loaded event fired.');
+	// Fade out the preloader after a delay
+	$('#preloader').delay(1500).fadeOut('slow', function() {
+        console.log('Preloader: FadeOut complete.');
+        // After preloader fades out, make body overflow visible
+        $('body').css({'overflow-y': 'visible'});
+        console.log('Preloader: Overflow visible applied.');
+    });
+
+    // Fallback in case load event doesn't fire for some reason
+    setTimeout(function(){
+        console.log('Preloader: Fallback timeout triggered.');
+        $('#preloader').fadeOut('slow', function() {
+            console.log('Preloader: Fallback FadeOut complete.');
+            $('body').css({'overflow-y': 'visible'});
+            console.log('Preloader: Fallback Overflow visible applied.');
+        });
+    }, 5000); // Hide preloader after 5 seconds regardless
 
 	/* WOW Elements */
 	if (typeof WOW == 'function') {
